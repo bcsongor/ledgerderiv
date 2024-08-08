@@ -42,7 +42,7 @@ As of now _ledgerderiv_ must be compiled from sources. It has been tested on mac
    cmake --build cmake-build-windows-x64-release --config Release
    ```
 
-To build on different platforms or configurations please extend `CMakePresets.json` file.
+To build on different platforms or configurations please see `CMakePresets.json` file.
 
 ### Running
 
