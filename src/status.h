@@ -1,0 +1,12 @@
+#ifndef STATUS_H
+#define STATUS_H
+
+enum status {
+  STATUS_OK,
+  STATUS_ERROR_HID,
+  STATUS_ERROR_APDU,
+  STATUS_ERROR_HDPATH,
+  STATUS_ERROR_LUA,
+};
+
+#endif // STATUS_H
