@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get install -y autoconf libudev-dev
+
+      - name: Setup vcpkg
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git
+          cd vcpkg && ./bootstrap-vcpkg.sh -disableMetrics
+          echo "VCPKG_ROOT=$PWD" >> $GITHUB_ENV
+
+      - name: Build
+        run: |
+          cmake --preset linux-x64-release -B cmake-build-linux-x64-release
+          cmake --build cmake-build-linux-x64-release --config Release
+
+      - name: Test
+        run: cmake --build cmake-build-linux-x64-release --config Release --target run_tests
